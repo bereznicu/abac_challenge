@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class StepperWidget extends ConsumerWidget {
+  final List<String> steps = const ["Crează deviz", "Stabilește ora"];
+
   const StepperWidget({super.key});
 
   @override
@@ -11,28 +13,25 @@ class StepperWidget extends ConsumerWidget {
         ref.watch(diagnoseNotifierProvider.select((state) => state.step));
 
     return Stepper(
-      physics: const NeverScrollableScrollPhysics(),
-      margin: EdgeInsets.zero,
-      type: StepperType.horizontal,
-      elevation: 0,
-      controlsBuilder: (_, __) {
-        return const SizedBox();
-      },
-      steps: [
-        Step(
-          isActive: currentStep < 1,
-          state: currentStep > 0 ? StepState.complete : StepState.editing,
-          title: const Text(""),
-          label: const Text("Crează deviz"),
-          content: Container(),
-        ),
-        Step(
-            isActive: currentStep >= 1,
-            state: currentStep >= 1 ? StepState.editing : StepState.disabled,
-            title: const Text(""),
-            label: const Text("Stabilește ora"),
-            content: Container())
-      ],
-    );
+        physics: const NeverScrollableScrollPhysics(),
+        margin: EdgeInsets.zero,
+        type: StepperType.horizontal,
+        elevation: 0,
+        controlsBuilder: (_, __) {
+          return const SizedBox();
+        },
+        steps: steps.map<Step>((step) {
+          int stepIndex = steps.indexOf(step);
+          return Step(
+              title: const Text(""),
+              content: const SizedBox(),
+              isActive: currentStep == stepIndex,
+              label: Text(step),
+              state: currentStep > stepIndex
+                  ? StepState.complete
+                  : currentStep < stepIndex
+                      ? StepState.disabled
+                      : StepState.editing);
+        }).toList());
   }
 }

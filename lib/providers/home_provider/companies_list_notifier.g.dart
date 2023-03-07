@@ -7,7 +7,7 @@ part of 'companies_list_notifier.dart';
 // **************************************************************************
 
 String _$companiesListNotifierHash() =>
-    r'4e6ae01820c84c3c05f480b37c6b2ac03e249450';
+    r'36c9fe8e257101fe3b4d526687fc9e39e2d2113f';
 
 /// See also [CompaniesListNotifier].
 @ProviderFor(CompaniesListNotifier)

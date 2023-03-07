@@ -19,7 +19,7 @@ class CompaniesListNotifier extends _$CompaniesListNotifier {
         companies.sort((a, b) => a.price.compareTo(b.price));
         break;
       case CompaniesFilters.rating:
-        companies.sort((a, b) => a.rating.compareTo(b.rating));
+        companies.sort((a, b) => b.rating.compareTo(a.rating));
         break;
       case CompaniesFilters.time:
         companies.sort((a, b) => a.time.compareTo(b.time));
